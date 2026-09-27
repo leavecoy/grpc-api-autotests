@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package course.v1;
+
+option go_package = "github.com/Nikita-Filonov/api-go-autotests-server/gen/go/v1;v1";
+
+message Empty {}
+
+message User {
+  string id = 1;
+  string email = 2;
+  string last_name = 3;
+  string first_name = 4;
+  string middle_name = 5;
+}
+
+message File {
+  string id = 1;
+  string filename = 2;
+  string directory = 3;
+  string url = 4;
+}
+
+message Course {
+  string id = 1;
+  string title = 2;
+  optional int32 max_score = 3;
+  optional int32 min_score = 4;
+  string description = 5;
+  File preview_file = 6;
+  optional string estimated_time = 7;
+  User created_by_user = 8;
+}
+
+message Exercise {
+  string id = 1;
+  string title = 2;
+  string course_id = 3;
+  optional int32 max_score = 4;
+  optional int32 min_score = 5;
+  int32 order_index = 6;
+  string description = 7;
+  optional string estimated_time = 8;
+}
+
+message Token {
+  string token_type = 1;
+  string access_token = 2;
+  string refresh_token = 3;
+}

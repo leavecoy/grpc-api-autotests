@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package course.v1;
+
+option go_package = "github.com/Nikita-Filonov/api-go-autotests-server/gen/go/v1;v1";
+
+import "v1/common.proto";
+
+message CreateFileRequest {
+  string filename = 1;
+  string directory = 2;
+  bytes content = 3;
+}
+
+message GetFileRequest { string id = 1; }
+message GetFileResponse { File file = 1; }
+message DeleteFileRequest { string id = 1; }
+
+service FilesService {
+  rpc CreateFile(CreateFileRequest) returns (GetFileResponse);
+  rpc GetFile(GetFileRequest) returns (GetFileResponse);
+  rpc DeleteFile(DeleteFileRequest) returns (Empty);
+}

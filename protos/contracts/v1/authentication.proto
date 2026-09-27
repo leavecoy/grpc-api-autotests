@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package course.v1;
+
+option go_package = "github.com/Nikita-Filonov/api-go-autotests-server/gen/go/v1;v1";
+
+import "v1/common.proto";
+
+message LoginRequest { string email = 1; string password = 2; }
+message RefreshRequest { string refresh_token = 1; }
+message LoginResponse { Token token = 1; }
+
+service AuthenticationService {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Refresh(RefreshRequest) returns (LoginResponse);
+}

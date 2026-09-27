@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package course.v1;
+
+option go_package = "github.com/Nikita-Filonov/api-go-autotests-server/gen/go/v1;v1";
+
+import "v1/common.proto";
+
+message CreateCourseRequest {
+  string title = 1;
+  optional int32 max_score = 2;
+  optional int32 min_score = 3;
+  string description = 4;
+  optional string estimated_time = 5;
+  string preview_file_id = 6;
+  string created_by_user_id = 7;
+}
+
+message UpdateCourseRequest {
+  string id = 1;
+  optional string title = 2;
+  optional int32 max_score = 3;
+  optional int32 min_score = 4;
+  optional string description = 5;
+  optional string estimated_time = 6;
+}
+
+message GetCourseRequest { string id = 1; }
+message ListCoursesRequest { string user_id = 1; }
+message GetCourseResponse { Course course = 1; }
+message ListCoursesResponse { repeated Course courses = 1; }
+message DeleteCourseRequest { string id = 1; }
+
+service CoursesService {
+  rpc CreateCourse(CreateCourseRequest) returns (GetCourseResponse);
+  rpc GetCourse(GetCourseRequest) returns (GetCourseResponse);
+  rpc ListCourses(ListCoursesRequest) returns (ListCoursesResponse);
+  rpc UpdateCourse(UpdateCourseRequest) returns (GetCourseResponse);
+  rpc DeleteCourse(DeleteCourseRequest) returns (Empty);
+}
